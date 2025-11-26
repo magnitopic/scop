@@ -1,0 +1,6 @@
+scop
+*.o
+*.dSYM/
+.DS_Store
+*Zone.Identifier
+._*
