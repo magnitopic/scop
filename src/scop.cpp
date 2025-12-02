@@ -4,9 +4,7 @@
 #include <cmath>
 
 Scop::Scop(int width, int height, const char *title)
-	: _width(width), _height(height), _title(title), _window(NULL), _running(true)
-{
-}
+	: _width(width), _height(height), _title(title), _window(NULL), _running(true) {}
 
 Scop::~Scop()
 {
@@ -15,7 +13,6 @@ Scop::~Scop()
 
 bool Scop::init()
 {
-	// Initialize GLFW
 	if (!glfwInit())
 	{
 		std::cerr << "Error: Failed to initialize GLFW" << std::endl;
