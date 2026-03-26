@@ -2,6 +2,7 @@
 NAME			=	scop
 
 SCOP_SRC		=	src/main.cpp \
+					src/Parser.cpp \
 					src/scop.cpp
 
 OBJS			=	$(SCOP_SRC:.cpp=.o)
@@ -13,8 +14,10 @@ CXXFLAGS		=	-Wall -Werror -Wextra -std=c++11 -DGL_SILENCE_DEPRECATION
 
 # GLFW paths (Homebrew on macOS)
 GLFW_PATH		=	/opt/homebrew/opt/glfw
-INCLUDES		=	-I$(GLFW_PATH)/include
-EXTRAFLAGS		=	-L$(GLFW_PATH)/lib -lglfw -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+INCLUDES		=	-I/opt/homebrew/opt/glfw/include -I$(HOME)/.local/include
+EXTRAFLAGS		=	-L/opt/homebrew/opt/glfw/lib -L$(HOME)/.local/lib -lglad -lglfw -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+
+
 
 # Colours
 RED				=	\033[0;31m

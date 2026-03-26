@@ -6,7 +6,7 @@
 /*   By: alaparic <alaparic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:15 by alaparic          #+#    #+#             */
-/*   Updated: 2025/12/10 16:49:18 by alaparic         ###   ########.fr       */
+/*   Updated: 2025/12/10 20:20:20 by alaparic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ public:
 	Parser(const Parser &copy);
 	Parser &operator=(const Parser &assign);
 	~Parser();
-
-	
 };
 
 #endif
