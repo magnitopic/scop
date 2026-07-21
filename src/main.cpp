@@ -64,11 +64,6 @@ int main()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glfwSwapBuffers(window);
 
-	while (!glfwWindowShouldClose(window))
-	{
-		glfwPollEvents();
-	}
-
 	// Create a vertex buffer object (VBO) and copy the vertex data to it
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
@@ -141,6 +136,8 @@ int main()
 		glBindVertexArrayAPPLE(VAO);
 		// glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		glfwPollEvents();
 	}
 
 	glDeleteVertexArraysAPPLE(1, &VAO);
