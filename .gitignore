@@ -4,3 +4,6 @@ scop
 .DS_Store
 *Zone.Identifier
 ._*
+include/KHR/
+include/glad/
+src/glad.c

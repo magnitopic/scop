@@ -2,20 +2,29 @@
 NAME			=	scop
 
 SCOP_SRC		=	src/main.cpp \
-					src/Parser.cpp \
-					src/scop.cpp
+					src/glad.c
 
 OBJS			=	$(SCOP_SRC:.cpp=.o)
+OBJS			:=	$(OBJS:.c=.o)
 
 # Compiler
 CXX				=	g++
+CC				=	gcc
 RM				=	rm -f
 CXXFLAGS		=	-Wall -Werror -Wextra -std=c++11 -DGL_SILENCE_DEPRECATION
 
-# GLFW paths (Homebrew on macOS)
-GLFW_PATH		=	/opt/homebrew/opt/glfw
-INCLUDES		=	-I/opt/homebrew/opt/glfw/include -I$(HOME)/.local/include
-EXTRAFLAGS		=	-L/opt/homebrew/opt/glfw/lib -L$(HOME)/.local/lib -lglad -lglfw -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+# Platform detection
+UNAME			:=	$(shell uname)
+
+ifeq ($(UNAME), Darwin)
+# macOS (Homebrew)
+INCLUDES		=	-I./include -I/opt/homebrew/opt/glfw/include
+EXTRAFLAGS		=	-L/opt/homebrew/opt/glfw/lib -lglfw -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+else
+# Linux
+INCLUDES		=	-I./include
+EXTRAFLAGS		=	-lglfw -lGL -ldl -lpthread -lm
+endif
 
 
 
@@ -38,6 +47,9 @@ $(NAME):		$(OBJS)
 
 %.o: %.cpp
 				@$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+%.o: %.c
+				@$(CC) $(INCLUDES) -c $< -o $@
 
 clean:
 				@$(RM) $(OBJS)

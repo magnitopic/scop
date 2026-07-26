@@ -114,12 +114,10 @@ int main()
 	// -- Using VAO (Vertex Array Object) --
 
 	unsigned int VAO;
-	glGenVertexArraysAPPLE(1, &VAO);
-	// glGenVertexArrays(1, &VAO);
+	glGenVertexArrays(1, &VAO);
 
 	// 1. bind Vertex Array Object
-	glBindVertexArrayAPPLE(VAO);
-	// glBindVertexArray(VAO);
+	glBindVertexArray(VAO);
 	// 2. copy our vertices array in a buffer for OpenGL to use
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -133,15 +131,14 @@ int main()
 
 		// draw our first triangle
 		glUseProgram(shaderProgram);
-		glBindVertexArrayAPPLE(VAO);
-		// glBindVertexArray(VAO);
+		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
+		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	glDeleteVertexArraysAPPLE(1, &VAO);
-	// glDeleteVertexArrays(1, &VAO);
+	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteProgram(shaderProgram);
 
