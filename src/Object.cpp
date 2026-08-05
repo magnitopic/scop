@@ -6,7 +6,7 @@
 /*   By: alaparic <alaparic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 13:05:48 by alaparic          #+#    #+#             */
-/*   Updated: 2026/08/05 13:14:23 by alaparic         ###   ########.fr       */
+/*   Updated: 2026/08/05 14:36:05 by alaparic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,26 @@ std::ifstream Object::openFile(std::string const &filename)
 	return file;
 }
 
+std::vector<float> Object::parseFaceLine(const std::string &line)
+{
+	std::vector<float> face;
+	std::istringstream iss(line);
+	std::string tag, token;
+	iss >> tag;
+
+	while (iss >> token)
+	{
+		std::smatch match;
+		if (std::regex_match(token, match, tokenPattern))
+		{
+			float fv;
+			fv = std::stoi(match[1]);
+			face.push_back(fv);
+		}
+	}
+	return face;
+}
+
 void Object::parser(std::string const &filename)
 {
 	std::ifstream file = this->openFile(filename);
@@ -50,7 +70,32 @@ void Object::parser(std::string const &filename)
 	std::string line;
 
 	while (std::getline(file, line))
-		std::cout << line << std::endl;
+	{
+		std::smatch match;
+
+		// Checking for vertex lines
+		if (std::regex_match(line, match, vertexPattern))
+		{
+			float x = std::stof(match[1]);
+			float y = std::stof(match[2]);
+			float z = std::stof(match[3]);
+			vertices.push_back(x);
+			vertices.push_back(y);
+			vertices.push_back(z);
+		}
+		else
+		{
+			// Checking for face lines
+			if (line.rfind("f ", 0) == 0)
+			{
+				std::vector<float> face = parseFaceLine(line);
+				for (const auto &fv : face)
+					faces.push_back(fv);
+			}
+		}
+	}
+
+	std::cout << "Parsed " << vertices.size() << " vertices and " << faces.size() << " faces." << std::endl;
 
 	file.close();
 }
