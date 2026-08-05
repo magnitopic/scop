@@ -6,7 +6,7 @@
 /*   By: alaparic <alaparic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 13:05:48 by alaparic          #+#    #+#             */
-/*   Updated: 2026/08/05 14:36:05 by alaparic         ###   ########.fr       */
+/*   Updated: 2026/08/05 14:38:59 by alaparic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ void Object::parser(std::string const &filename)
 					faces.push_back(fv);
 			}
 		}
+	}
+
+	if (vertices.empty())
+	{
+		throw std::runtime_error("Invalid .obj file: No vertices found");
 	}
 
 	std::cout << "Parsed " << vertices.size() << " vertices and " << faces.size() << " faces." << std::endl;

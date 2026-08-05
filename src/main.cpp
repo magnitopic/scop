@@ -13,11 +13,6 @@
 #include "../include/scop.hpp"
 #include "../include/Object.hpp"
 
-/* float vertices[] = {
-	-0.5f, -0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	0.0f, 0.5f, 0.0f}; */
-
 int main(int argc, char **argv)
 {
 	if (argc <= 1 || argc > 3)
@@ -36,7 +31,7 @@ int main(int argc, char **argv)
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << "Error: " << e.what() << std::endl;
+		std::cerr << "\033[0;31mError: " << e.what() << "\033[0m" << std::endl;
 		return (1);
 	}
 
