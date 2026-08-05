@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Parser.cpp                                         :+:      :+:    :+:   */
+/*   Object.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alaparic <alaparic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/10 16:49:31 by alaparic          #+#    #+#             */
-/*   Updated: 2025/12/10 20:20:01 by alaparic         ###   ########.fr       */
+/*   Created: 2026/08/05 13:06:18 by alaparic          #+#    #+#             */
+/*   Updated: 2026/08/05 13:11:49 by alaparic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Parser.hpp"
+#ifndef OBJECT_HPP_
+#define OBJECT_HPP_
 
-Parser::Parser()
+
+#include <vector>
+#include <fstream>
+#include <iostream>
+
+class Object
 {
-}
 
-Parser::Parser(const Parser &copy)
-{
-	*this = copy;
-}
+private:
+	std::vector<float> vertices;
 
-Parser &Parser::operator=(const Parser &assign)
-{
-	if (this != &assign)
-	{
-		// Copy member variables here
-	}
-	return *this;
-}
+	std::ifstream openFile(std::string const &filename);
 
-Parser::~Parser() {}
+public:
+	Object();
+	Object(const Object &copy);
+	Object &operator=(const Object &assign);
+	~Object();
+
+	void parser(std::string const &filename);
+};
+
+#endif

@@ -2,7 +2,8 @@
 NAME			=	scop
 
 SCOP_SRC		=	src/main.cpp \
-					src/glad.c
+					src/Object.cpp \
+					src/scop.cpp
 
 OBJS			=	$(SCOP_SRC:.cpp=.o)
 OBJS			:=	$(OBJS:.c=.o)

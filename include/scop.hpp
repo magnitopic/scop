@@ -14,7 +14,6 @@
 #define SCOP_HPP
 
 #include <iostream>
-#include <glad/glad.h>
 
 typedef struct s_vec3
 {
