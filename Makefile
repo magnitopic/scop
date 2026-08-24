@@ -3,6 +3,8 @@ NAME			=	scop
 
 SCOP_SRC		=	src/main.cpp \
 					src/Object.cpp \
+					src/glad.c \
+					src/aux/loadShaderSource.cpp \
 					src/scop.cpp
 
 OBJS			=	$(SCOP_SRC:.cpp=.o)

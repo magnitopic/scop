@@ -53,4 +53,6 @@ private:
 	
 };
 
-#endif // SCOP_HPP
+std::string loadShaderSource(const std::string& path);
+
+#endif
