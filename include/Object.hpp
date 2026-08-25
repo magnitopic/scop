@@ -24,15 +24,15 @@ class Object
 {
 
 private:
-	std::vector<float> vertices;
-	std::vector<float> faces;
 	std::regex vertexPattern = std::regex(R"(^v\s+(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)\s*$)");
 	std::regex tokenPattern = std::regex(R"(^(\d+)(?:\/(\d*)(?:\/(\d+))?)?$)");
 
 	std::ifstream openFile(std::string const &filename);
-	std::vector<float> parseFaceLine(const std::string &line);
+	std::vector<unsigned int> parseFaceLine(const std::string &line);
 
 public:
+	std::vector<float> vertices;
+	std::vector<unsigned int> faces;
 	Object();
 	Object(const Object &copy);
 	Object &operator=(const Object &assign);

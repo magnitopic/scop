@@ -13,9 +13,7 @@
 #include "../include/Object.hpp"
 
 // Orthodox methods
-Object::Object()
-{
-}
+Object::Object() {}
 
 Object::Object(const Object &copy)
 {
@@ -43,25 +41,41 @@ std::ifstream Object::openFile(std::string const &filename)
 	return file;
 }
 
-std::vector<float> Object::parseFaceLine(const std::string &line)
+std::vector<unsigned int> Object::parseFaceLine(const std::string &line)
 {
-	std::vector<float> face;
+	std::vector<unsigned int> indices;
 	std::istringstream iss(line);
 	std::string tag, token;
+
 	iss >> tag;
 
 	while (iss >> token)
 	{
 		std::smatch match;
+
 		if (std::regex_match(token, match, tokenPattern))
 		{
-			float fv;
-			fv = std::stoi(match[1]);
-			face.push_back(fv);
+			unsigned int index = std::stoul(match[1]);
+			indices.push_back(index - 1);
 		}
 	}
-	return face;
+
+	std::vector<unsigned int> triangles;
+
+	if (indices.size() < 3)
+		return triangles;
+
+	// Triangle fan triangulation
+	for (size_t i = 1; i + 1 < indices.size(); ++i)
+	{
+		triangles.push_back(indices[0]);
+		triangles.push_back(indices[i]);
+		triangles.push_back(indices[i + 1]);
+	}
+
+	return triangles;
 }
+
 
 void Object::parser(std::string const &filename)
 {
@@ -88,7 +102,7 @@ void Object::parser(std::string const &filename)
 			// Checking for face lines
 			if (line.rfind("f ", 0) == 0)
 			{
-				std::vector<float> face = parseFaceLine(line);
+				std::vector<unsigned int> face = parseFaceLine(line);
 				for (const auto &fv : face)
 					faces.push_back(fv);
 			}

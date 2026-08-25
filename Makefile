@@ -14,7 +14,7 @@ OBJS			:=	$(OBJS:.c=.o)
 CXX				=	g++
 CC				=	gcc
 RM				=	rm -f
-CXXFLAGS		=	-Wall -Werror -Wextra -std=c++11 -DGL_SILENCE_DEPRECATION
+CXXFLAGS		=	-Wall -Werror -Wextra -std=c++11 -DGL_SILENCE_DEPRECATION -g3 -fsanitize=address
 
 # Platform detection
 UNAME			:=	$(shell uname)
